@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#070a12">
+<title>Overlay Getkey by NYYYXYZ</title>
+<style>
+:root{color-scheme:dark;--bg:#070a12;--panel:#0d1423;--line:#1e3353;--blue:#3aa7ff;--cyan:#67e8f9;--muted:#91a4bf}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at top,#102849 0,#070a12 48%,#04060b 100%);font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;color:#edf6ff;display:grid;place-items:center;padding:22px}
+.wrap{width:min(100%,760px)}.brand{text-align:center;margin:10px auto 24px}.logo{display:inline-grid;place-items:center;width:62px;height:62px;border-radius:19px;background:linear-gradient(135deg,#1d75d6,#61e7ff);color:#03101d;font-weight:1000;font-size:21px;box-shadow:0 0 34px #208fff55}.eyebrow{font-size:11px;letter-spacing:.24em;color:var(--cyan);font-weight:800;margin-top:17px}.brand h1{font-size:clamp(27px,6vw,42px);margin:8px 0 7px;letter-spacing:-.04em}.brand p{color:var(--muted);margin:0;font-size:14px}
+.panel{background:linear-gradient(145deg,#101b2dF2,#080d17F2);border:1px solid var(--line);border-radius:24px;padding:clamp(18px,4vw,30px);box-shadow:0 20px 70px #0008;backdrop-filter:blur(12px)}
+h2{font-size:19px;margin:0 0 8px}.desc{color:var(--muted);font-size:13px;line-height:1.6;margin:0 0 20px}
+.btn{width:100%;border:1px solid #2a5780;border-radius:13px;padding:15px 17px;background:linear-gradient(100deg,#1264b7,#167dba);color:white;font-weight:850;font-size:14px;cursor:pointer;transition:.2s;box-shadow:0 8px 24px #0877c733}.btn:hover{transform:translateY(-1px);filter:brightness(1.12)}.btn:disabled{opacity:.4;cursor:not-allowed;transform:none}
+.hidden{display:none}.progressrow{display:flex;justify-content:space-between;gap:12px;font-size:12px;color:var(--muted);margin:18px 0 9px}.track{height:7px;border-radius:99px;background:#17253a;overflow:hidden}.fill{height:100%;width:0;background:linear-gradient(90deg,#2584ff,#67e8f9);transition:width .2s}
+.steps{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:16px 0}.step{display:flex;align-items:center;gap:10px;text-align:left;background:#0b1320;border:1px solid #1d2e47;border-radius:12px;padding:12px;color:#dcecff;cursor:pointer;min-width:0}.step:hover{border-color:#3c9cff}.num{flex:none;width:27px;height:27px;display:grid;place-items:center;border-radius:9px;background:#142b45;color:#7dd3fc;font-weight:900;font-size:12px}.step.done .num{background:#123d36;color:#8bf5d2}.step span:last-child{font-size:12px;font-weight:700}.note{font-size:12px;line-height:1.6;color:#8fa6c1;border:1px solid #26364a;background:#0a111d;border-radius:12px;padding:12px;margin:14px 0}.confirm{display:flex;align-items:flex-start;gap:10px;font-size:12px;line-height:1.5;color:#c4d5e9;margin:16px 0}.confirm input{accent-color:#38bdf8;margin-top:2px}
+.menu{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:18px}.item{display:flex;align-items:center;gap:10px;text-align:left;padding:14px 12px;background:linear-gradient(145deg,#101c2d,#0a101a);border:1px solid #203753;border-radius:13px;color:#eaf5ff;font-size:12px;font-weight:800;cursor:pointer;min-width:0}.item:hover{border-color:#3aa7ff;box-shadow:0 0 18px #188bff22}.item .tag{margin-left:auto;font-size:9px;color:#70d8ff;border:1px solid #285b7a;padding:4px 6px;border-radius:6px;white-space:nowrap}.footer{text-align:center;color:#61758f;font-size:11px;margin:18px 0 2px}
+@media(max-width:470px){.steps,.menu{grid-template-columns:1fr}.step{padding:13px}.panel{border-radius:19px}}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <header class="brand">
+    <div class="logo">NX</div>
+    <div class="eyebrow">NY Y Y X Y Z  •  DIGITAL HUB</div>
+    <h1>Overlay Getkey</h1>
+    <p>by <strong>NYYYXYZ</strong> — clean, fast, mobile-friendly</p>
+  </header>
+
+  <section class="panel" id="welcome">
+    <h2>Selamat datang 👋</h2>
+    <p class="desc">Tekan mulai untuk membuka menu. Sebelum lanjut, kunjungi channel WhatsApp yang ditautkan di bawah.</p>
+    <button class="btn" id="start">MULAI GETKEY <span aria-hidden="true">→</span></button>
+  </section>
+
+  <section class="panel hidden" id="gate">
+    <h2>Langkah channel WhatsApp</h2>
+    <p class="desc">Buka channel lewat setiap tombol. Semua tombol mengarah ke channel yang sama. Situs ini tidak bisa memeriksa status follow secara otomatis; centang konfirmasi hanya setelah kamu menyelesaikannya.</p>
+    <div class="progressrow"><span>Daftar kunjungan</span><strong id="count">0 / 10</strong></div>
+    <div class="track"><div class="fill" id="fill"></div></div>
+    <div class="steps" id="steps"></div>
+    <label class="confirm"><input type="checkbox" id="confirm"><span>Saya sudah membuka channel dan menyelesaikan langkah yang diminta.</span></label>
+    <button class="btn" id="verify" disabled>VERIF SAYA SUDAH MENYELESAIKAN →</button>
+    <div class="note">Info: tombol verifikasi akan membuka kembali channel WhatsApp. Ini konfirmasi mandiri, bukan verifikasi otomatis dari WhatsApp.</div>
+  </section>
+
+  <section class="panel hidden" id="catalog">
+    <h2>Menu Getkey</h2>
+    <p class="desc">Pilih menu di bawah. Tautan menu saat ini membuka channel WhatsApp NYYYXYZ.</p>
+    <div class="menu" id="menu"></div>
+    <div class="note">Tautan key atau file khusus belum dikonfigurasi. Gunakan channel resmi untuk informasi terbaru.</div>
+  </section>
+  <div class="footer">© <span id="year"></span> NYYYXYZ • Overlay Getkey</div>
+</main>
+<script>
+const CHANNEL = "https://whatsapp.com/channel/0029Vb7sYxYHbFV4BleXsV1J";
+const labels = [
+"Getkey XREG","Getkey Vexa Deluxe","Getkey AimHack","Getkey Drip Wire",
+"Getkey Drip Client","Getkey Drip Proxy","Getkey HG Cheat","Getkey HG Proxy",
+"Getkey Trollmodz","Getkey Pato Blue","Getkey Pato Orange","Getkey Pato Green",
+"Getkey ABCD Panel","Getkey Balamod","Getkey File Auto HS"
+];
+const opened = new Set();
+const $ = id => document.getElementById(id);
+$("year").textContent = new Date().getFullYear();
+$("start").addEventListener("click",()=>{$("welcome").classList.add("hidden");$("gate").classList.remove("hidden");$("gate").scrollIntoView({behavior:"smooth",block:"start"});});
+const steps = $("steps");
+for(let i=1;i<=10;i++){
+  const b=document.createElement("button"); b.className="step"; b.type="button";
+  b.innerHTML='<span class="num">'+String(i).padStart(2,"0")+'</span><span>Kunjungi Channel '+i+'</span>';
+  b.addEventListener("click",()=>{opened.add(i);b.classList.add("done");b.querySelector(".num").textContent="✓";update();window.open(CHANNEL,"_blank","noopener,noreferrer");});
+  steps.appendChild(b);
+}
+function update(){ $("count").textContent=opened.size+" / 10"; $("fill").style.width=(opened.size*10)+"%"; $("verify").disabled=!(opened.size===10 && $("confirm").checked); }
+$("confirm").addEventListener("change",update);
+$("verify").addEventListener("click",()=>{if(opened.size===10 && $("confirm").checked){$("gate").classList.add("hidden");$("catalog").classList.remove("hidden");$("catalog").scrollIntoView({behavior:"smooth",block:"start"});window.open(CHANNEL,"_blank","noopener,noreferrer");}});
+const menu=$("menu");
+labels.forEach((label,i)=>{const b=document.createElement("button");b.className="item";b.type="button";b.innerHTML='<span class="num">'+String(i+1).padStart(2,"0")+'</span><span>'+label+'</span><span class="tag">OPEN</span>';b.addEventListener("click",()=>window.open(CHANNEL,"_blank","noopener,noreferrer"));menu.appendChild(b);});
+</script>
+</body>
+</html>
